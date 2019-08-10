@@ -5,7 +5,7 @@
  * @copyright Copyright 2003-2019 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: orders.php for Paket Tracking 2019-08-07 15:31:51Z webchills $
+ * @version $Id: orders.php for Paket Tracking 2019-08-10 12:59:51Z webchills $
  */
 require('includes/application_top.php');
 
@@ -366,7 +366,7 @@ if (zen_not_null($action) && $order_exists == true) {
 
         <div class="row noprint">
           <div class="form-inline">
-            <div class="form-group col-xs-4 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group col-md-2 col-md-offset-1">
                 <?php
                 echo zen_draw_form('search', FILENAME_ORDERS, '', 'get', '', true);
                 echo zen_draw_label(HEADING_TITLE_SEARCH_ALL, 'searchAll', 'class="sr-only"');
@@ -384,7 +384,7 @@ if (zen_not_null($action) && $order_exists == true) {
               </div>
               <?php echo '</form>'; ?>
             </div>
-            <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group col-md-2">
                 <?php
                 echo zen_draw_form('search_orders_products', FILENAME_ORDERS, '', 'get', '', true);
                 echo zen_draw_label(HEADING_TITLE_SEARCH_DETAIL_ORDERS_PRODUCTS, 'searchProduct', 'class="sr-only"');
@@ -403,7 +403,7 @@ if (zen_not_null($action) && $order_exists == true) {
               <span id="helpBlock3" class="help-block"><?php echo HEADING_TITLE_SEARCH_DETAIL_ORDERS_PRODUCTS; ?></span>
               <?php echo '</form>'; ?>
             </div>
-            <div class="form-group col-xs-4 col-sm-3 col-md-3 col-lg-3">
+            <div class="form-group col-md-2">
                 <?php
                 echo zen_draw_form('orders', FILENAME_ORDERS, '', 'get', '', true);
                 echo zen_draw_label(HEADING_TITLE_SEARCH, 'oID', 'class="sr-only"');
@@ -412,7 +412,25 @@ if (zen_not_null($action) && $order_exists == true) {
                 echo '</form>';
                 ?>
             </div>
-            <div class="form-group col-xs-4 col-sm-3 col-md-3 col-lg-3">
+	                 <div class="form-group col-xs-4 col-sm-3 col-md-3 col-lg-3">
+              <?php echo zen_draw_form('search_tracking', FILENAME_ORDERS, '', 'get', '', true); ?>
+                <label for="trackingSearch" class="sr-only">Tracking ID</label>
+                <div class="input-group">
+                  <?php
+                  $placeholder = zen_output_string_protected(isset($_GET['search_tracking']) && $_GET['search_tracking'] != '' ? $_GET['search_tracking'] : 'TrackingID');
+                  echo zen_draw_input_field('search_tracking', '', 'id="trackingSearch" class="form-control" aria-describedby="helpBlock3" placeholder="' . $placeholder . '"');
+                  ?>
+                <?php if ((isset($_GET['search_tracking']) && zen_not_null($_GET['search_tracking'])) or $_GET['cID'] !='') { ?>
+                  <div class="input-group-btn">
+                    <a class="btn btn-danger" role="button" aria-label="<?php echo TEXT_RESET_FILTER; ?>" href="<?php echo zen_href_link(FILENAME_ORDERS); ?>"><span aria-hidden="true">&times;</span></a>
+                  </div>
+                <?php } ?>
+                </div>
+                <span id="helpBlock3" class="help-block"><?php echo TEXT_SEARCH_FOR_TRACKING_ID; ?></span>
+              <?php echo '</form>'; ?>
+            </div>
+
+             <div class="form-group col-md-2">
                 <?php
                 echo zen_draw_form('status', FILENAME_ORDERS, '', 'get', '', true);
                 echo zen_draw_label(HEADING_TITLE_STATUS, 'selectstatus', 'class="sr-only"');
@@ -983,24 +1001,35 @@ if (zen_not_null($action) && $order_exists == true) {
                 </tr>
               </thead>
               <tbody>
-                  <?php
+<?php
 // Only one or the other search
 // create search_orders_products filter
-                  $search = '';
-                  $search_distinct = ' ';
-                  $new_table = '';
-                  $new_fields = '';
-                  if (isset($_GET['search_orders_products']) && zen_not_null($_GET['search_orders_products'])) {
-                    $search_distinct = ' distinct ';
-                    $new_table = " left join " . TABLE_ORDERS_PRODUCTS . " op on (op.orders_id = o.orders_id) ";
-                    $keywords = zen_db_input(zen_db_prepare_input($_GET['search_orders_products']));
-                    $search = " and (op.products_model like '%" . $keywords . "%' or op.products_name like '" . $keywords . "%')";
-                    if (substr(strtoupper($_GET['search_orders_products']), 0, 3) == 'ID:') {
-                      $keywords = TRIM(substr($_GET['search_orders_products'], 3));
-                      $search = " and op.products_id ='" . (int)$keywords . "'";
-                    }
-                  } else {
+  $search = '';
+  $new_table = '';
+  $new_fields = '';
+  if (isset($_GET['search_orders_products']) && zen_not_null($_GET['search_orders_products'])) {
+    $new_fields = '';
+    $search_distinct = ' distinct ';
+    $new_table = " left join " . TABLE_ORDERS_PRODUCTS . " op on (op.orders_id = o.orders_id) ";
+    $keywords = zen_db_input(zen_db_prepare_input($_GET['search_orders_products']));
+    $search = " and (op.products_model like '%" . $keywords . "%' or op.products_name like '" . $keywords . "%')";
+    if (substr(strtoupper($_GET['search_orders_products']), 0, 3) == 'ID:') {
+      $keywords = TRIM(substr($_GET['search_orders_products'], 3));
+      $search = " and op.products_id ='" . (int)$keywords . "'";
+    }
+  } else if (isset($_GET['search_tracking']) && zen_not_null($_GET['search_tracking'])) { 
+   $search_distinct = ' ';    
+    $new_table = " left join " . TABLE_ORDERS_STATUS_HISTORY . " otrack on (otrack.orders_id = o.orders_id) ";
+    $keywords = zen_db_input(zen_db_prepare_input($_GET['search_tracking']));
+    $search = " and (otrack.track_id1 like '%" . $keywords . "%' or otrack.track_id2 like '" . $keywords . "%' or otrack.track_id3 like '" . $keywords . "%' or otrack.track_id4 like '" . $keywords . "%' or otrack.track_id5 like '" . $keywords . "%' or otrack.track_id6 like '" . $keywords . "%')";
 
+  
+ 
+    $new_fields = ", o.customers_company, o.customers_email_address, o.customers_street_address, o.delivery_company, o.delivery_name, o.delivery_street_address, o.billing_company, o.billing_name, o.billing_street_address, o.payment_module_code, o.shipping_module_code ";
+
+  } else  {
+?>
+<?php
 // create search filter
                     $search = '';
                     if (isset($_GET['search']) && zen_not_null($_GET['search'])) {

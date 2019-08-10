@@ -10,6 +10,3 @@ Das Modul unterstützt nun auch Deutsche Post Brief, deren Trackinglink zusätzl
 Für den Kunden enthält die Bestellhistory ebenfalls den Trackinglink.
 Die Suche in der Administration unter Kunden > Bestellungen sucht auch nach eingegebenen Trackingnummern. 
 Das Modul ist vollständig multilingual, sowohl im Admin als auch im Frontend. 
-
-Noch nicht integriert:
-Suchfunktion für Trackingnummern
