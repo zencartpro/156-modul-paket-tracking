@@ -4,13 +4,16 @@
  * @copyright Copyright 2003-2019 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: track_orders.php 2019-08-10 12:12:14 webchills $
+ * @version $Id: track_orders.php 2019-09-09 08:12:14 webchills $
 */
 // test if track orders sidebox should show
   $show_track_orders= false;
-
-if ($show_track_orders = true) {
   if (zen_is_logged_in()) {
+  	$show_track_orders= true;
+  }
+
+if ($show_track_orders === true) {
+  
 // retrieve the last x products purchased
   $orders_history_tracking_query = 'select o.orders_id, o.date_purchased
                    from ' . TABLE_ORDERS . " o
@@ -44,7 +47,7 @@ if ($show_track_orders = true) {
       }
       $customer_orders_tracking_string .= '</table>';
     }
-  }
+  
       require $template->get_template_dir('tpl_track_orders.php',DIR_WS_TEMPLATE, $current_page_base,'sideboxes'). '/tpl_track_orders.php';
       $title =  BOX_HEADING_TRACK_ORDERS;
       $title_link = false;
