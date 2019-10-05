@@ -6,7 +6,7 @@
  * @copyright Copyright 2003-2019 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: functions_osh_update.php for Paket Tracking 2019-08-10 08:56:42Z webchills $
+ * @version $Id: functions_osh_update.php for Paket Tracking 2019-10-05 10:32:42Z webchills $
  */
 if (!defined('IS_ADMIN_FLAG')) {
     exit('Invalid Access');
@@ -236,7 +236,7 @@ function zen_update_orders_history($orders_id, $message = '', $updated_by = null
 
                 //send extra emails
                 if (empty($send_extra_emails_to) && SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO_STATUS == '1') {
-                    $send_xtra_emails_to = (string)SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO;
+                    $send_extra_emails_to = (string)SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO;
                 }
                 if (!empty($send_extra_emails_to)) {
                 	// BOF pdf Rechnung 
