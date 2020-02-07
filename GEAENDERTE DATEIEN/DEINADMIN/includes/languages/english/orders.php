@@ -2,7 +2,7 @@
 /**
  * Zen Cart German Specific
  * @package admin
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
  * @version $Id: orders.php for Paket Tracking 2019-08-06 20:01:25Z webchills $
@@ -30,7 +30,7 @@ define('TABLE_HEADING_STATUS', 'Status');
 define('TABLE_HEADING_TYPE', 'Order Type');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_QUANTITY', 'Qty.');
-define('TABLE_HEADING_PRODUCTS_MODEL', 'Model');
+
 define('TABLE_HEADING_PRODUCTS', 'Products');
 define('TABLE_HEADING_TAX', 'Tax');
 define('TABLE_HEADING_TOTAL', 'Total');
@@ -99,6 +99,7 @@ define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was n
 define('ENTRY_ORDER_ID','Invoice No. ');
 define('TEXT_INFO_ATTRIBUTE_FREE', '&nbsp;-&nbsp;<span class="alert">FREE</span>');
 
+define('TEXT_DOWNLOAD','Download'); 
 define('TEXT_DOWNLOAD_TITLE', 'Order Download Status');
 define('TEXT_DOWNLOAD_STATUS', 'Status');
 define('TEXT_DOWNLOAD_FILENAME', 'Filename');
@@ -109,6 +110,8 @@ define('TEXT_DOWNLOAD_AVAILABLE', 'Available');
 define('TEXT_DOWNLOAD_EXPIRED', 'Expired');
 define('TEXT_DOWNLOAD_MISSING', 'Not on Server');
 
+define('TEXT_EXTENSION_NOT_UNDERSTOOD', 'File extension %s not supported'); 
+define('TEXT_FILE_NOT_FOUND', 'File not found'); 
 define('IMAGE_ICON_STATUS_CURRENT', 'Status - Available');
 define('IMAGE_ICON_STATUS_EXPIRED', 'Status - Expired');
 define('IMAGE_ICON_STATUS_MISSING', 'Status - Missing');
@@ -128,12 +131,14 @@ define('TEXT_INFO_EXPIRED_COUNT', 'Expired Count:<br />');
 define('TABLE_HEADING_CUSTOMER_COMMENTS', 'Customer<br />Comments');
 define('TEXT_COMMENTS_YES', 'Customer Comments - YES');
 define('TEXT_COMMENTS_NO', 'Customer Comments - NO');
+
 define('TEXT_CUSTOMER_LOOKUP', '<i class="fa fa-search"></i> Lookup Customer');
 
 define('TEXT_INVALID_ORDER_STATUS', '<span class="alert">(Invalid Order Status)</span>');
 
 define('BUTTON_TO_LIST', 'Order List');
 define('SELECT_ORDER_LIST', 'Jump to Order:');
+
 define('TEXT_MAP_CUSTOMER_ADDRESS', 'Map Customer Address');
 define('TEXT_MAP_SHIPPING_ADDRESS', 'Map Shipping Address');
 define('TEXT_MAP_BILLING_ADDRESS', 'Map Billing Address');

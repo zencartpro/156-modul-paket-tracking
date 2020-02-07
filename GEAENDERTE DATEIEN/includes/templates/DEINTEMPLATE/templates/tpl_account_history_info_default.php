@@ -7,10 +7,10 @@
  * Displays information related to a single specific order
  *
  * @package templateSystem
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: tpl_account_history_info_default.php for Paket Tracking 2019-08-06 18:34:47Z webchills $
+ * @version $Id: tpl_account_history_info_default.php for Paket Tracking 2020-02-07 17:26:47Z webchills $
  */
 ?>
 <div class="centerColumn" id="accountHistInfo">
@@ -19,8 +19,9 @@
 <br class="clearBoth" />
 
 <?php if ($current_page != FILENAME_CHECKOUT_SUCCESS) { ?>
-<h2 id="orderHistoryDetailedOrder"><?php echo HEADING_TITLE . ORDER_HEADING_DIVIDER . sprintf(HEADING_ORDER_NUMBER, $_GET['order_id']); ?></h2>
+<h2 id="orderHistoryDetailedOrder"><?php echo HEADING_TITLE . ORDER_HEADING_DIVIDER . sprintf(HEADING_ORDER_NUMBER, zen_output_string_protected($_GET['order_id'])); ?></h2>
 <?php } ?>
+
 <table id="orderHistoryHeading">
     <tr class="tableHeading">
         <th scope="col" id="myAccountQuantity"><?php echo HEADING_QUANTITY; ?></th>
@@ -58,11 +59,11 @@
     }
 ?>
         <td class="accountTotalDisplay">
-        <?php 
+        <?php
          $ppe = zen_round(zen_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']), $currencies->get_decimal_places($order->info['currency']));
-         $ppt = $ppe * $order->products[$i]['qty']; 
-        //        echo $currencies->format(zen_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . ($order->products[$i]['onetime_charges'] != 0 ? '<br />' . $currencies->format(zen_add_tax($order->products[$i]['onetime_charges'], $order->products[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']) : '') 
-        echo $currencies->format($ppt, true, $order->info['currency'], $order->info['currency_value']) . ($order->products[$i]['onetime_charges'] != 0 ? '<br />' . $currencies->format(zen_add_tax($order->products[$i]['onetime_charges'], $order->products[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']) : ''); 
+         $ppt = $ppe * $order->products[$i]['qty'];
+        //        echo $currencies->format(zen_add_tax($order->products[$i]['final_price'], $order->products[$i]['tax']) * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']) . ($order->products[$i]['onetime_charges'] != 0 ? '<br />' . $currencies->format(zen_add_tax($order->products[$i]['onetime_charges'], $order->products[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']) : '')
+        echo $currencies->format($ppt, true, $order->info['currency'], $order->info['currency_value']) . ($order->products[$i]['onetime_charges'] != 0 ? '<br />' . $currencies->format(zen_add_tax($order->products[$i]['onetime_charges'], $order->products[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']) : '');
         ?></td>
     </tr>
 <?php
@@ -128,7 +129,7 @@ if (sizeof($statusArray)) {
 			$display_track_id .= (empty($statuses['track_id8']) ? '' : "" . CARRIER_NAME_8 . "" . ":<br/><a href=" . CARRIER_LINK_8 . nl2br(zen_output_string_protected($statuses['track_id8'])) . ' target="_blank">' . nl2br(zen_output_string_protected($statuses['track_id8'])) . "</a>" );
 			?><?php echo $display_track_id; ?></td>
 			<!-- End Paket Tracking  -->
-        <td><?php echo (empty($statuses['comments']) ? '&nbsp;' : nl2br(zen_output_string_protected($statuses['comments']))); ?></td> 
+        <td><?php echo (empty($statuses['comments']) ? '&nbsp;' : nl2br(zen_output_string_protected($statuses['comments']))); ?></td>
      </tr>
 <?php
   }
@@ -188,4 +189,5 @@ if (sizeof($statusArray)) {
     echo $tmp1 . substr($tmp, 1);
 ?>
 <?php } ?>
-</div>
+
+</div> 
