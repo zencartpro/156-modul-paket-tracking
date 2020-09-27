@@ -3,10 +3,10 @@
  * functions_osh_update
  * Zen Cart German Specific
  * @package functions
- * @copyright Copyright 2003-2019 Zen Cart Development Team
+ * @copyright Copyright 2003-2020 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: functions_osh_update.php for Paket Tracking 2019-10-05 10:32:42Z webchills $
+ * @version $Id: functions_osh_update.php for Paket Tracking 2020-09-27 09:31:42Z webchills $
  */
 if (!defined('IS_ADMIN_FLAG')) {
     exit('Invalid Access');
@@ -139,12 +139,12 @@ function zen_update_orders_history($orders_id, $message = '', $updated_by = null
                     $notify_comments = EMAIL_TEXT_COMMENTS_UPDATE . $comments . "\n\n";
                 }
               
-              if (zen_not_null($track_id1)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_1 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id1 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br />" . CARRIER_LINK_1 . $track_id1 . "\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
-              if (zen_not_null($track_id2)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_2 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id2 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br />" . CARRIER_LINK_2 . $track_id2 . "\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
-              if (zen_not_null($track_id3)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_3 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id3 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br />" . CARRIER_LINK_3 . $track_id3 . "\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
-              if (zen_not_null($track_id4)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_4 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id4 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br />" . CARRIER_LINK_4 . $track_id4 . "\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
-              if (zen_not_null($track_id5)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_5 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id5 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br />" . CARRIER_LINK_5 . $track_id5 . "\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
-              if (zen_not_null($track_id6)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_6 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id6 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br />" . CARRIER_LINK_6_PART1 . $track_id6 . CARRIER_LINK_6_PART2 . $track_day . CARRIER_LINK_6_PART3 . $track_month . CARRIER_LINK_6_PART4 . $track_year . "\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
+              if (zen_not_null($track_id1)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_1 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id1 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br /><a href=" . CARRIER_LINK_1 . $track_id1 . ">" . CARRIER_LINK_1 . $track_id1 . "</a>\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
+              if (zen_not_null($track_id2)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_2 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id2 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br /><a href=" . CARRIER_LINK_2 . $track_id2 . ">" . CARRIER_LINK_2 . $track_id2 . "</a>\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
+              if (zen_not_null($track_id3)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_3 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id3 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br /><a href=" . CARRIER_LINK_3 . $track_id3 . ">" . CARRIER_LINK_3 . $track_id3 . "</a>\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
+              if (zen_not_null($track_id4)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_4 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id4 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br /><a href=" . CARRIER_LINK_4 . $track_id4 . ">" . CARRIER_LINK_4 . $track_id4 . "</a>\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
+              if (zen_not_null($track_id5)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_5 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id5 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br /><a href=" . CARRIER_LINK_5 . $track_id5 . ">" . CARRIER_LINK_5 . $track_id5 . "</a>\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
+              if (zen_not_null($track_id6)) { $notify_comments .= "" .PT_EMAIL_YOURID ." " . CARRIER_NAME_6 . " Tracking ID " .PT_EMAIL_YOURIDIS ." " . $track_id6 . " \n\n<br />" .PT_EMAIL_LINKINFO ." \n<br /><a href=" . CARRIER_LINK_6_PART1 . $track_id6 . CARRIER_LINK_6_PART2 . $track_day . CARRIER_LINK_6_PART3 . $track_month . CARRIER_LINK_6_PART4 . $track_year . ">" . CARRIER_LINK_6_PART1 . $track_id6 . CARRIER_LINK_6_PART2 . $track_day . CARRIER_LINK_6_PART3 . $track_month . CARRIER_LINK_6_PART4 . $track_year . "</a>\n\n<br />" .PT_EMAIL_24HOURS ."" . "\n\n<br />"; }
                 
                 $notify_comments = "\n".$notify_comments."\n";
                 
